@@ -1,0 +1,3 @@
+package com.github.mateuszwlosek.eventstoreexample.citizeneventhandlermongodbreadmodelservice.model.event
+
+interface CitizenEvent

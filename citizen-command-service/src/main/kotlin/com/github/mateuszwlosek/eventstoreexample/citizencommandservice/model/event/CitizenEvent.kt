@@ -1,0 +1,3 @@
+package com.github.mateuszwlosek.eventstoreexample.citizencommandservice.model.event
+
+interface CitizenEvent

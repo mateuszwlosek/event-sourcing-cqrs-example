@@ -1,0 +1,21 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: citizen-command-service
+  data:
+    mongodb:
+      host: mongodb
+
+citizen-service:
+  event-store:
+    host: "eventstore.db"
+    port: "2113"
+    citizens-stream-prefix: "citizens"
+    citizen-created-event: "citizen-created"
+    citizen-updated-event: "citizen-updated"
+    citizen-deleted-event: "citizen-deleted"
+    tls: false

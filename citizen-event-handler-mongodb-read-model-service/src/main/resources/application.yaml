@@ -1,0 +1,19 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: citizen-event-handler-mongodb-read-model-service
+  data:
+    mongodb:
+      host: mongodb
+
+citizen-service:
+  event-store:
+    host: "eventstore.db"
+    port: "2113"
+    citizens-stream-prefix: "citizens"
+    citizen-created-event: "citizen-created"
+    citizen-updated-event: "citizen-updated"
+    citizen-deleted-event: "citizen-deleted"
+    tls: false

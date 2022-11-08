@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+  eventstore.db:
+    image: eventstore/eventstore:21.10.8-bionic
+    environment:
+      - EVENTSTORE_CLUSTER_SIZE=1
+      - EVENTSTORE_EXT_TCP_PORT=1113
+      - EVENTSTORE_HTTP_PORT=2113
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+    ports:
+      - "1113:1113"
+      - "2113:2113"
+
+  mongodb:
+    image: mongo:4.2.6
+    ports:
+      - 27017:27017
+
+  citizen-command-service:
+    build: ./citizen-command-service
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    depends_on:
+      - eventstore.db
+      - mongodb
+
+  citizen-query-service:
+    build: ./citizen-query-service
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+      - eventstore.db
+
+  citizen-event-handler-mongodb-read-service:
+    build: ./citizen-event-handler-mongodb-read-model-service
+    ports:
+      - "8083:8083"
+    restart: unless-stopped
+    depends_on:
+      - eventstore.db
+      - mongodb
